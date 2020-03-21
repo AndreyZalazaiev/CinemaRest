@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Convert;
+import java.lang.reflect.Method;
 import java.sql.Date;
 
 @RestController
@@ -19,14 +20,14 @@ public class Controller {
     public @ResponseBody
     Iterable<account> getAllUsers() {
         return accRep.findAll();}
-    @PostMapping(path="/add") // Map ONLY POST Requests
+    @RequestMapping("add") // Map ONLY POST Requests
     public @ResponseBody String addNewAcc (@RequestParam String name
-            , @RequestParam String pass,@RequestParam Integer bonus,@RequestParam Date dob) {
+            , @RequestParam String pass,@RequestParam Integer bonus) {
         account acc=new account();
         acc.setName(name);
         acc.setPass(pass);
         acc.setBonus(bonus);
-        acc.setDoB(dob);
+       // acc.setDoB(dob);
         accRep.save(acc);
         return "Saved";
     }

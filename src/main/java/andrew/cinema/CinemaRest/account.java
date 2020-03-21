@@ -17,10 +17,8 @@ import java.util.Date;
 @Getter
 public class account {
     @Id
-    @UniqueElements
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idaccount;
-    @UniqueElements
     @NotNull
     private String Name;
     @NotNull
