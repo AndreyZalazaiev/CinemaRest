@@ -1,4 +1,4 @@
-package andrew.cinema.CinemaRest;
+package andrew.cinema.CinemaRest.Entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
