@@ -2,8 +2,10 @@ package andrew.cinema.CinemaRest;
 
 import andrew.cinema.CinemaRest.Entities.account;
 import andrew.cinema.CinemaRest.Entities.cinema;
+import andrew.cinema.CinemaRest.Entities.film;
 import andrew.cinema.CinemaRest.Repositories.accountRepos;
 import andrew.cinema.CinemaRest.Repositories.cinemaRepos;
+import andrew.cinema.CinemaRest.Repositories.filmRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +40,7 @@ public class Controller {
         return "deleted id:"+id;
     }
     //endregion
-
+    //region Cinema thing
     @Autowired
     private cinemaRepos cinemaRep;
     @GetMapping(path="/cinema")
@@ -57,6 +59,31 @@ public class Controller {
     public @ResponseBody String RemoveCinemaById (@RequestParam int id)
     {
         cinemaRep.deleteById(id);
+        return "deleted id:"+id;
+    }
+    //endregion
+
+    @Autowired
+    private filmRepos filmRep;
+    @GetMapping(path="/films")
+    public @ResponseBody
+    Iterable<film> getAllFilms() {
+        return filmRep.findAll();}
+    @RequestMapping("/films/add")
+    public @ResponseBody String addNewFilm (@RequestParam String name
+            , @RequestParam String description,@RequestParam String image,@RequestParam String trailer){
+        film fm=new film();
+        fm.setName(name);
+        fm.setDescription(description);
+        fm.setImage(image);
+        fm.setTrailer(trailer);
+        filmRep.save(fm);
+        return "Saved";
+    }
+    @RequestMapping("/films/delete")
+    public @ResponseBody String RemoveFilm (@RequestParam int id)
+    {
+        accRep.deleteById(id);
         return "deleted id:"+id;
     }
 }
