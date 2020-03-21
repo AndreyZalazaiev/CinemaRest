@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -39,8 +41,15 @@ public class account {
         Pass = pass;
     }
 
-    public void setDoB(Date doB) {
-         
-        DoB = doB;
+    public void setDoB(String doB) {
+        SimpleDateFormat formatterFirst = new SimpleDateFormat("yyyy-MM-dd");
+        Date date=null;
+        try {
+            date = formatterFirst.parse(doB);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.DoB=date;
+
     }
 }
