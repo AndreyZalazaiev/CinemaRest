@@ -24,6 +24,8 @@ public class account {
     @NotNull
     private String Pass;
     @NotNull
+    private String Email;
+    @NotNull
     private Integer Bonus;
     private Date DoB;
      public void setName (String name)
@@ -69,5 +71,13 @@ public class account {
 
     public Date getDoB() {
         return DoB;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getEmail() {
+        return Email;
     }
 }

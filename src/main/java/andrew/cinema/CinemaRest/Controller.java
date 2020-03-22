@@ -34,12 +34,13 @@ public class Controller {
         return accRep.findAll();}
     @RequestMapping("/accounts/add")
     public @ResponseBody String addNewAcc (@RequestParam String name
-            , @RequestParam String pass,@RequestParam Integer bonus,@RequestParam String date){
+            , @RequestParam String pass,@RequestParam Integer bonus,@RequestParam String date,@RequestParam String email){
         account acc=new account();
         acc.setName(name);
         acc.setPass(pass);
         acc.setBonus(bonus);
         acc.setDoB(date);
+        acc.setEmail(email);
         accRep.save(acc);
         return "Saved";
     }
