@@ -9,11 +9,14 @@ import andrew.cinema.CinemaRest.Repositories.cinemaRepos;
 import andrew.cinema.CinemaRest.Repositories.filmRepos;
 import andrew.cinema.CinemaRest.Repositories.hallRepos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.swing.text.html.parser.Entity;
+import java.awt.print.Pageable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -45,10 +48,10 @@ public class Controller {
         return "Saved";
     }
     @RequestMapping("/accounts/find")
-    public @ResponseBody String Find (@RequestParam String name)
+    public @ResponseBody Iterable<account> Find (@RequestParam String name)
     {
-        account a =accRep.findByName(name);
-        return ""+a;
+       // List<account> a = accRep.findByNameEquals(name);
+        return accRep.searchByName(name);
     }
     @RequestMapping("/accounts/delete")
     public @ResponseBody String RemoveById (@RequestParam int id)

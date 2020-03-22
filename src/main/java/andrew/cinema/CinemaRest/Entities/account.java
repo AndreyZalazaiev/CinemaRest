@@ -52,32 +52,8 @@ public class account {
         this.DoB=date;
 
     }
-
-    public String getName() {
-        return Name;
-    }
-
-    public String getPass() {
-        return Pass;
-    }
-
-    public Integer getIdaccount() {
-        return idaccount;
-    }
-
-    public Integer getBonus() {
-        return Bonus;
-    }
-
-    public Date getDoB() {
-        return DoB;
-    }
-
     public void setEmail(String email) {
         Email = email;
     }
 
-    public String getEmail() {
-        return Email;
-    }
 }
