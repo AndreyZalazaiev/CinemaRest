@@ -3,17 +3,27 @@ package andrew.cinema.CinemaRest;
 import andrew.cinema.CinemaRest.Entities.account;
 import andrew.cinema.CinemaRest.Entities.cinema;
 import andrew.cinema.CinemaRest.Entities.film;
+import andrew.cinema.CinemaRest.Entities.hall;
 import andrew.cinema.CinemaRest.Repositories.accountRepos;
 import andrew.cinema.CinemaRest.Repositories.cinemaRepos;
 import andrew.cinema.CinemaRest.Repositories.filmRepos;
+import andrew.cinema.CinemaRest.Repositories.hallRepos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.EntityManager;
+import javax.swing.text.html.parser.Entity;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class Controller {
-    @GetMapping(value = "/hello")
-    public String sayHI(@RequestParam(defaultValue = "Andrew") String name) {
-        return String.format("Hello %s!", name);
+    @GetMapping(value = "/status")
+    public String status()
+    {
+        return String.format("Server is responding ");
     }
     //region Account thing
     @Autowired
@@ -32,6 +42,12 @@ public class Controller {
         acc.setDoB(date);
         accRep.save(acc);
         return "Saved";
+    }
+    @RequestMapping("/accounts/find")
+    public @ResponseBody String Find (@RequestParam String name)
+    {
+        account a =accRep.findByName(name);
+        return ""+a;
     }
     @RequestMapping("/accounts/delete")
     public @ResponseBody String RemoveById (@RequestParam int id)
@@ -62,7 +78,7 @@ public class Controller {
         return "deleted id:"+id;
     }
     //endregion
-
+    //region Film thing
     @Autowired
     private filmRepos filmRep;
     @GetMapping(path="/films")
@@ -83,7 +99,29 @@ public class Controller {
     @RequestMapping("/films/delete")
     public @ResponseBody String RemoveFilm (@RequestParam int id)
     {
-        accRep.deleteById(id);
+        filmRep.deleteById(id);
+        return "deleted id:"+id;
+    }
+    //endregion
+
+    @Autowired
+    private hallRepos hallRep;
+    @GetMapping(path="/halls")
+    public @ResponseBody
+    Iterable<hall> getAllHalls() {
+        return hallRep.findAll();}
+    @RequestMapping("/halls/add")
+    public @ResponseBody String addNewHall (@RequestParam String name,String type,Integer idcinema ){
+        hall hl=new hall();
+        hl.setType(type);
+        hl.setIdcinema(idcinema);
+        hallRep.save(hl);
+        return "Saved";
+    }
+    @RequestMapping("/halls/delete")
+    public @ResponseBody String RemoveHall (@RequestParam int id)
+    {
+        hallRep.deleteById(id);
         return "deleted id:"+id;
     }
 }

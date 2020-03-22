@@ -2,8 +2,6 @@ package andrew.cinema.CinemaRest.Entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,5 +49,25 @@ public class account {
         }
         this.DoB=date;
 
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public String getPass() {
+        return Pass;
+    }
+
+    public Integer getIdaccount() {
+        return idaccount;
+    }
+
+    public Integer getBonus() {
+        return Bonus;
+    }
+
+    public Date getDoB() {
+        return DoB;
     }
 }
