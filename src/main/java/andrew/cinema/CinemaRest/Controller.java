@@ -52,11 +52,11 @@ public class Controller {
     {
         return accRep.searchByName(name);
     }
-    /* @RequestMapping("/accounts/search")
-     public @ResponseBody Iterable<account> FindById (@RequestParam Integer id)
-     {
-         return accRep.findById(id);
-     }*/
+    @RequestMapping("/accounts/auth")
+    public @ResponseBody Iterable<account> Auth (@RequestParam String email,@RequestParam String pass)
+    {
+        return accRep.searchExistingAcc(email,pass);
+    }
     @RequestMapping("/accounts/email")
     public @ResponseBody Iterable<account> FindById (@RequestParam String email)
     {
@@ -116,7 +116,7 @@ public class Controller {
         return "deleted id:"+id;
     }
     //endregion
-
+    //region Hall thing
     @Autowired
     private hallRepos hallRep;
     @GetMapping(path="/halls")
@@ -137,4 +137,5 @@ public class Controller {
         hallRep.deleteById(id);
         return "deleted id:"+id;
     }
+    //endregion
 }
