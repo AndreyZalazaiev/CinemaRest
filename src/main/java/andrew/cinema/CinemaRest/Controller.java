@@ -53,9 +53,9 @@ public class Controller {
         return accRep.searchByName(name);
     }
     @RequestMapping("/accounts/auth")
-    public @ResponseBody Iterable<account> Auth (@RequestParam String email,@RequestParam String pass)
+    public @ResponseBody Iterable<account> Auth (@RequestParam String name,@RequestParam String pass)
     {
-        return accRep.searchExistingAcc(email,pass);
+        return accRep.searchExistingAcc(name,pass);
     }
     @RequestMapping("/accounts/email")
     public @ResponseBody Iterable<account> FindById (@RequestParam String email)
