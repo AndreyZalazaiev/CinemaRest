@@ -50,8 +50,17 @@ public class Controller {
     @RequestMapping("/accounts/find")
     public @ResponseBody Iterable<account> Find (@RequestParam String name)
     {
-       // List<account> a = accRep.findByNameEquals(name);
         return accRep.searchByName(name);
+    }
+    /* @RequestMapping("/accounts/search")
+     public @ResponseBody Iterable<account> FindById (@RequestParam Integer id)
+     {
+         return accRep.findById(id);
+     }*/
+    @RequestMapping("/accounts/email")
+    public @ResponseBody Iterable<account> FindById (@RequestParam String email)
+    {
+        return accRep.searchByEmail(email);
     }
     @RequestMapping("/accounts/delete")
     public @ResponseBody String RemoveById (@RequestParam int id)

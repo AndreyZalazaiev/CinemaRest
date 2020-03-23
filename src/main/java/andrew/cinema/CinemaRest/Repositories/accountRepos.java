@@ -12,6 +12,8 @@ import java.util.List;
 public interface accountRepos extends CrudRepository<account,Integer> {
     @Query("from account a where a.Name = :name")
     List<account> searchByName(@Param("name") String name);
+    @Query("from account a where a.Email = :email")
+    List<account> searchByEmail(@Param("email") String email);
     //@Query
     //List<account>findByname(String Name);
 }
