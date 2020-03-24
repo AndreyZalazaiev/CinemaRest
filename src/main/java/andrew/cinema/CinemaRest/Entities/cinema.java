@@ -20,8 +20,6 @@ public class cinema {
     private String Name;
     @NotNull
     private String Adress;
-    private String image;
-    private String trailer;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idcinema",referencedColumnName ="idcinema")
