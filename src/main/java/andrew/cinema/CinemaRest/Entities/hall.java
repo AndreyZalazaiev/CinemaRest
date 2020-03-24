@@ -1,11 +1,13 @@
 package andrew.cinema.CinemaRest.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -21,17 +23,11 @@ public class hall {
     private String Type;
     @NotNull
     private Integer idcinema;
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public void setType(String type) {
-        Type = type;
-    }
-    public Integer getIdcinema() {
-        return idcinema;
-    }
-    public void setIdcinema(Integer idcinema) {
-        this.idcinema = idcinema;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idhall",referencedColumnName ="idhall")
+    private List<session> session;
+    public void setSession(session sn) {
+        this.session.add(sn);
     }
 }

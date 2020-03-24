@@ -7,44 +7,58 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.security.PrivateKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-public class account {
+public class session {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer idaccount;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idsession;
     @NotNull
-    private String Name;
+    private Integer idfilm;
     @NotNull
-    private String Pass;
+    private Integer idhall;
     @NotNull
-    private String Email;
+    private Date start;
     @NotNull
-    private Integer Bonus;
-    private Date DoB;
+    private Date end;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idaccount",referencedColumnName ="idaccount")
+    @JoinColumn(name = "idsession",referencedColumnName ="idsession")
     List<ticket> tk;
     public void setTk(ticket tk) {
         this.tk.add(tk);
     }
-    public void setDoB(String doB) {
+    public void setStart(String input) {
         SimpleDateFormat formatterFirst = new SimpleDateFormat("yyyy-MM-dd");
-        Date date=null;
+        Date date = null;
         try {
-            date = formatterFirst.parse(doB);
+            date = formatterFirst.parse(input);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        this.DoB=date;
+        this.start = date;
+
+    }
+
+    public void setEnd(String input)
+    {
+        SimpleDateFormat formatterFirst = new SimpleDateFormat("yyyy-MM-dd");
+        Date date=null;
+        try {
+            date = formatterFirst.parse(input);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.end=date;
 
     }
 

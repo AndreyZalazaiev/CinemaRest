@@ -1,12 +1,11 @@
 package andrew.cinema.CinemaRest.Repositories;
 
-import andrew.cinema.CinemaRest.Entities.film;
+import andrew.cinema.CinemaRest.Entities.cinema;
 import andrew.cinema.CinemaRest.Entities.session;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface filmRepos extends CrudRepository<film,Integer> {
-
+public interface sessionRepos extends CrudRepository<session,Integer> {
     @Query
-    film findByIdfilm(Integer idfilm);
+    session findByIdsession(Integer idsession);
 }

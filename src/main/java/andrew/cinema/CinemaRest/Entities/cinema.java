@@ -3,6 +3,7 @@ package andrew.cinema.CinemaRest.Entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter
+@Setter
 @Table(name = "cinema")
 public class cinema {
     @Id
@@ -29,24 +31,6 @@ public class cinema {
         this.hall.add(hl);
     }
 
-    public void setIdcinema(Integer idcinema) {
-        this.idcinema = idcinema;
-    }
-
-    public List<hall> getHall() {
-        return hall;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public void setAdress(String adress) {
-        Adress = adress;
-    }
 
 
-    public Integer getIdcinema() {
-        return idcinema;
-    }
 }

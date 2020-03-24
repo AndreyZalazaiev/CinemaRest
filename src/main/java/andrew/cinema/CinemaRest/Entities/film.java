@@ -1,18 +1,19 @@
 package andrew.cinema.CinemaRest.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Entity
 @NoArgsConstructor
 @Getter
+@Setter
 public class film {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -22,17 +23,11 @@ public class film {
     private String Description;
     private String image;
     private String trailer;
-    public void setName(String name) {
-        Name = name;
-    }
-    public void setImage(String image) {
-        this.image = image;
-    }
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public void setTrailer(String treiler) {
-        this.trailer = treiler;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idfilm",referencedColumnName ="idfilm")
+    private List<session> session;
+    public void setSession(session sn) {
+        this.session.add(sn);
     }
 }

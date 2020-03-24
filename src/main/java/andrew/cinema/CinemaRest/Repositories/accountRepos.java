@@ -1,6 +1,7 @@
 package andrew.cinema.CinemaRest.Repositories;
 
 import andrew.cinema.CinemaRest.Entities.account;
+import andrew.cinema.CinemaRest.Entities.cinema;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,6 @@ public interface accountRepos extends CrudRepository<account,Integer> {
     List<account> searchExistingAcc(@Param("name") String email,@Param("pass") String pass);
     //@Query
     //List<account>findByname(String Name);
+    @Query
+    account findByIdaccount(Integer idaccount);
 }
