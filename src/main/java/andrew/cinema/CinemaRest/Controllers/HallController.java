@@ -32,9 +32,7 @@ public class HallController {
         hl.setType(type);
         hl.setIdcinema(idcinema);
         cnm.setHall(hl);
-
         cnmRep.save(cnm);
-        hallRep.save(hl);
 
         return "Saved";
     }
