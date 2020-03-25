@@ -24,11 +24,11 @@ public class ticket{
     @NotNull
     private Integer idsession;
     @NotNull
-    private Double price;
+    private float price;
     @NotNull
     private Integer place;
     @NotNull
-    private Integer row;
+    private Integer rownum;
 
 
 }

@@ -30,4 +30,11 @@ public class film {
     public void setSession(session sn) {
         this.session.add(sn);
     }
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idfilm",referencedColumnName ="idfilm")
+    private List<review> rev;
+     public void setReview(review rev) {
+         this.rev.add(rev);
+     }
 }

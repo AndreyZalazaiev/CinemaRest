@@ -23,19 +23,20 @@ public class TicketController {
 
     @RequestMapping("/tickets/add")
     public @ResponseBody
-    String addNew(@RequestParam Integer idaccount, @RequestParam Integer idsession, @RequestParam Double price,@RequestParam Integer place,@RequestParam Integer row) {
+    String addNew(@RequestParam Integer idaccount, @RequestParam Integer idsession, @RequestParam float price,@RequestParam Integer place,@RequestParam Integer row) {
         ticket tk = new ticket();
         tk.setIdsession(idsession);
         tk.setIdaccount(idaccount);
         tk.setPrice(price);
         tk.setPlace(place);
-        tk.setRow(row);
+        tk.setRownum(row);
         account ac= accRep.findByIdaccount(idaccount);
         session sn = sessionRep.findByIdsession(idsession);
         ac.setTk(tk);
         sn.setTk(tk);
-        accRep.save(ac);
         sessionRep.save(sn);
+        accRep.save(ac);
+
         return "Saved";
     }
 

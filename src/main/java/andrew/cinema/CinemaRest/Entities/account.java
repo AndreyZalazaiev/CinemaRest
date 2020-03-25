@@ -33,6 +33,13 @@ public class account {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idaccount",referencedColumnName ="idaccount")
     List<ticket> tk;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idaccount",referencedColumnName ="idaccount")
+    private List<review> rev;
+    public void setReview(review rev) {
+        this.rev.add(rev);
+    }
     public void setTk(ticket tk) {
         this.tk.add(tk);
     }
