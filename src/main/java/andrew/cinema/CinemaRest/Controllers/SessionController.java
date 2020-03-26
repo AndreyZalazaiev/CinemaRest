@@ -51,4 +51,9 @@ public class SessionController {
         sessionRep.deleteById(id);
         return "deleted id:" + id;
     }
+  /*  @RequestMapping("/sessionsByIdFilm")
+    public @ResponseBody
+   Iterable<session> Sessions(@RequestParam int idfilm) { ;
+        return sessionRep.findByIdfilm(idfilm);
+    }*/
 }

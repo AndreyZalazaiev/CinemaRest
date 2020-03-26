@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -42,5 +43,10 @@ public class HallController {
     String RemoveHall(@RequestParam int id) {
         hallRep.deleteById(id);
         return "deleted id:" + id;
+    }
+    @RequestMapping("/hallsByIdcinema")
+            public @ResponseBody Iterable<hall> findHalls(@RequestParam int idcinema)
+    {
+        return hallRep.findByIdcinema(idcinema);
     }
 }
