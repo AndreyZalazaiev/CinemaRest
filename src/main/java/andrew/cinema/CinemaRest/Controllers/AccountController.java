@@ -33,15 +33,10 @@ public class AccountController {
 
     @RequestMapping("/accounts/find")
     public @ResponseBody
-    Iterable<account> Find(@RequestParam String name) {
-        return accRep.searchByName(name);
+    account Findbyid(@RequestParam String id) {
+        return accRep.findByIdaccount(id);
     }
 
-    @RequestMapping("/accounts/email")
-    public @ResponseBody
-    Iterable<account> FindById(@RequestParam String email) {
-        return accRep.searchByEmail(email);
-    }
 
     @RequestMapping("/accounts/delete")
     public @ResponseBody
