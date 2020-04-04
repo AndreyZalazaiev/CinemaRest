@@ -5,6 +5,8 @@ import andrew.cinema.CinemaRest.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 public class ReviewController {
@@ -38,11 +40,16 @@ public class ReviewController {
 
         return "Saved";
     }
-
+    @RequestMapping("/reviews/find")
+    public @ResponseBody
+    List<review> find(@RequestParam int idfilm) {
+        return reviewRep.findByIdfilm(idfilm);
+    }
     @RequestMapping("/reviews/delete")
     public @ResponseBody
     String Remove(@RequestParam int id) {
         reviewRep.deleteById(id);
         return "deleted id:" + id;
     }
+
 }

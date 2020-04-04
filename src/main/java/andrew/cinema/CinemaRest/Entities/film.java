@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,8 +22,11 @@ public class film {
     @NotNull
     private String Name;
     private String Description;
-    private String image;
-    private String trailer;
+    private String Image;
+    private String Trailer;
+    @Column(name="agelimit")
+    private String AgeLimit;
+    private String Genre;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idfilm",referencedColumnName ="idfilm")

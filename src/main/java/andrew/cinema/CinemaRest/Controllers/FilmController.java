@@ -20,12 +20,14 @@ public class FilmController {
     @RequestMapping("/films/add")
     public @ResponseBody
     String addNewFilm(@RequestParam String name
-            , @RequestParam String description, @RequestParam String image, @RequestParam String trailer) {
+            , @RequestParam String description, @RequestParam String image, @RequestParam String trailer,@RequestParam String ageLimit,@RequestParam String genre) {
         film fm = new film();
         fm.setName(name);
         fm.setDescription(description);
         fm.setImage(image);
         fm.setTrailer(trailer);
+        fm.setAgeLimit(ageLimit);
+        fm.setGenre(genre);
         filmRep.save(fm);
         return "Saved";
     }
