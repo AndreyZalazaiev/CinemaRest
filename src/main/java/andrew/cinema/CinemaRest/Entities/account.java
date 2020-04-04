@@ -18,12 +18,11 @@ import java.util.List;
 @Setter
 public class account {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer idaccount;
+    private String idaccount;
     @NotNull
     private String Name;
     @NotNull
-    private String Pass;
+    private String Picture;
     @NotNull
     private String Email;
     @NotNull

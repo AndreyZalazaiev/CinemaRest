@@ -20,7 +20,7 @@ public class ticket{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idticket;
     @NotNull
-    private Integer idaccount;
+    private String idaccount;
     @NotNull
     private Integer idsession;
     @NotNull

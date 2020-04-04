@@ -18,11 +18,12 @@ public class AccountController {
 
     @RequestMapping("/accounts/add")
     public @ResponseBody
-    String addNewAcc(@RequestParam String name
-            , @RequestParam String pass, @RequestParam Integer bonus, @RequestParam String date, @RequestParam String email) {
+    String addNewAcc(@RequestParam String idaccount,@RequestParam String name
+            , @RequestParam String picture, @RequestParam Integer bonus, @RequestParam String date, @RequestParam String email) {
         account acc = new account();
+        acc.setIdaccount(idaccount);
         acc.setName(name);
-        acc.setPass(pass);
+        acc.setPicture(picture);
         acc.setBonus(bonus);
         acc.setDoB(date);
         acc.setEmail(email);
@@ -34,12 +35,6 @@ public class AccountController {
     public @ResponseBody
     Iterable<account> Find(@RequestParam String name) {
         return accRep.searchByName(name);
-    }
-
-    @RequestMapping("/accounts/auth")
-    public @ResponseBody
-    Iterable<account> Auth(@RequestParam String name, @RequestParam String pass) {
-        return accRep.searchExistingAcc(name, pass);
     }
 
     @RequestMapping("/accounts/email")

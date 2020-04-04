@@ -20,7 +20,7 @@ public class review {
     @NotNull
     private Integer idfilm;
     @NotNull
-    private Integer idaccount;
+    private String idaccount;
     @NotNull
     private String text;
     @NotNull

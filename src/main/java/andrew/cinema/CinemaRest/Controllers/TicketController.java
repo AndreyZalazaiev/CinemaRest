@@ -23,7 +23,7 @@ public class TicketController {
 
     @RequestMapping("/tickets/add")
     public @ResponseBody
-    String addNew(@RequestParam Integer idaccount, @RequestParam Integer idsession, @RequestParam float price,@RequestParam Integer place,@RequestParam Integer row) {
+    String addNew(@RequestParam String idaccount, @RequestParam Integer idsession, @RequestParam float price,@RequestParam Integer place,@RequestParam Integer row) {
         ticket tk = new ticket();
         tk.setIdsession(idsession);
         tk.setIdaccount(idaccount);

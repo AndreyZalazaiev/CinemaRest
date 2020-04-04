@@ -23,7 +23,7 @@ public class ReviewController {
 
     @RequestMapping("/reviews/add")
     public @ResponseBody
-    String addNew(@RequestParam Integer idfilm, @RequestParam Integer idaccount, @RequestParam String text,@RequestParam Integer mark) {
+    String addNew(@RequestParam Integer idfilm, @RequestParam String idaccount, @RequestParam String text,@RequestParam Integer mark) {
         review rev=new review();
         rev.setIdfilm(idfilm);
         rev.setIdaccount(idaccount);
