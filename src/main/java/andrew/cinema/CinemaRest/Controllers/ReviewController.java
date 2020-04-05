@@ -43,7 +43,7 @@ public class ReviewController {
     @RequestMapping("/reviews/find")
     public @ResponseBody
     List<review> find(@RequestParam int idfilm) {
-        return reviewRep.findByIdfilm(idfilm);
+        return reviewRep.findDistinctByIdfilm(idfilm);
     }
     @RequestMapping("/reviews/delete")
     public @ResponseBody

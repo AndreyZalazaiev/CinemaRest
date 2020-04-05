@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface reviewRepos extends CrudRepository<review,Integer> {
     @Query
-    List<review> findByIdfilm(Integer idfilm);
+    List<review> findDistinctByIdfilm(Integer idfilm);
 }
 

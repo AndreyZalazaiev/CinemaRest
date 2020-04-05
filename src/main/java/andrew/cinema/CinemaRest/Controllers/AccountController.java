@@ -44,5 +44,10 @@ public class AccountController {
         accRep.deleteById(id);
         return "deleted id:" + id;
     }
+    @GetMapping(path = "/accounts/short")
+    public @ResponseBody
+    Iterable<account> shortAccounts() {
+        return accRep.shortView();
+    }
 
 }

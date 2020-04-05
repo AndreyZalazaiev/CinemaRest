@@ -19,4 +19,7 @@ public interface accountRepos extends CrudRepository<account,Integer> {
     //List<account>findByname(String Name);
     @Query
     account findByIdaccount(@Param("idaccount") String idaccount);
+
+    @Query(" select Name,Picture,idaccount from account  ")
+    Iterable<account> shortView();
 }
