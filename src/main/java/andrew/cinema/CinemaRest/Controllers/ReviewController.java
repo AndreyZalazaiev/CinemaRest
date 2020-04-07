@@ -5,9 +5,12 @@ import andrew.cinema.CinemaRest.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.transaction.Transactional;
 import java.util.List;
 
-
+@Transactional
 @RestController
 public class ReviewController {
     @Autowired
@@ -20,9 +23,14 @@ public class ReviewController {
     @GetMapping(path = "/reviews")
     public @ResponseBody
     Iterable<review> getAll() {
-        return reviewRep.findAll();
+        return reviewRep.distinctAll();
     }
 
+    @GetMapping(path = "/reviews/update")
+    public @ResponseBody
+    void Update(@RequestParam Integer idreview, @RequestParam String text, @RequestParam Integer mark) {
+        reviewRep.setValue(idreview,text,mark);
+    }
     @RequestMapping("/reviews/add")
     public @ResponseBody
     String addNew(@RequestParam Integer idfilm, @RequestParam String idaccount, @RequestParam String text,@RequestParam Integer mark) {
