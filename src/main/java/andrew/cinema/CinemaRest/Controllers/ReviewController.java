@@ -23,7 +23,7 @@ public class ReviewController {
     @GetMapping(path = "/reviews")
     public @ResponseBody
     Iterable<review> getAll() {
-        return reviewRep.distinctAll();
+        return reviewRep.findAll();
     }
 
     @GetMapping(path = "/reviews/update")
@@ -50,8 +50,8 @@ public class ReviewController {
     }
     @RequestMapping("/reviews/find")
     public @ResponseBody
-    List<review> find(@RequestParam int idfilm) {
-        return reviewRep.findDistinctByIdfilm(idfilm);
+    Iterable<review> find(@RequestParam int idfilm) {
+        return reviewRep.getDistinctByIdfilm(idfilm);
     }
     @RequestMapping("/reviews/delete")
     public @ResponseBody

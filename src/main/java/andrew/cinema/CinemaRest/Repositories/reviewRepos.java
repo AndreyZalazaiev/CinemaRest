@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 public interface reviewRepos extends CrudRepository<review,Integer> {
+    @Query("from review r where r.idfilm=:idflm ")
+    List<review> search(@Param("idflm") Integer id);
     @Query
-    List<review> findDistinctByIdfilm(Integer idfilm);
-    @Query("SELECT distinct idaccount,idfilm ,text, mark FROM review")
-    Iterable<review> distinctAll ();
+    Iterable<review> getDistinctByIdfilm(@Param("idfilm") Integer idfilm);
+
     @Modifying
     @Query("update review r set r.text = :text, r.mark=:mark where r.idreview = :idreview")
      void   setValue(@Param("idreview") Integer idreview, @Param("text") String text, @Param("mark") Integer mark );
