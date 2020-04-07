@@ -28,8 +28,9 @@ public class ReviewController {
 
     @GetMapping(path = "/reviews/update")
     public @ResponseBody
-    void Update(@RequestParam Integer idreview, @RequestParam String text, @RequestParam Integer mark) {
+    String Update(@RequestParam Integer idreview, @RequestParam String text, @RequestParam Integer mark) {
         reviewRep.setValue(idreview,text,mark);
+        return "updated";
     }
     @RequestMapping("/reviews/add")
     public @ResponseBody
