@@ -44,8 +44,8 @@ public class HallController {
         hallRep.deleteById(id);
         return "deleted id:" + id;
     }
-    @RequestMapping("/hallsByIdcinema")
-            public @ResponseBody Iterable<hall> findHalls(@RequestParam int idcinema)
+    @RequestMapping("halls/find")
+            public @ResponseBody List<hall> findHalls(@RequestParam int idcinema)
     {
         return hallRep.findByIdcinema(idcinema);
     }
