@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -51,9 +52,9 @@ public class SessionController {
         sessionRep.deleteById(id);
         return "deleted id:" + id;
     }
-  /*  @RequestMapping("/sessionsByIdFilm")
+    @RequestMapping("/sessions/find")
     public @ResponseBody
-   Iterable<session> Sessions(@RequestParam int idfilm) { ;
+    List<session> Sessions(@RequestParam int idfilm) { ;
         return sessionRep.findByIdfilm(idfilm);
-    }*/
+    }
 }
