@@ -38,7 +38,7 @@ public class session {
         this.tk.add(tk);
     }
     public void setStart(String input) {
-        SimpleDateFormat formatterFirst = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatterFirst = new SimpleDateFormat("yyyy-MM-dd hh-mm");
         Date date = null;
         try {
             date = formatterFirst.parse(input);
@@ -51,7 +51,7 @@ public class session {
 
     public void setEnd(String input)
     {
-        SimpleDateFormat formatterFirst = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatterFirst = new SimpleDateFormat("yyyy-MM-dd hh-mm");
         Date date=null;
         try {
             date = formatterFirst.parse(input);
