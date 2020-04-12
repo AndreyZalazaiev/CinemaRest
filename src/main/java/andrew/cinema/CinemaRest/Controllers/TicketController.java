@@ -5,6 +5,8 @@ import andrew.cinema.CinemaRest.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 
 @RestController
 public class TicketController {
@@ -18,7 +20,7 @@ public class TicketController {
     @GetMapping(path = "/tickets")
     public @ResponseBody
     Iterable<ticket> getAll() {
-        return ticketRep.findAll();
+        return ticketRep.getAllDistinct();
     }
 
     @RequestMapping("/tickets/add")
@@ -38,6 +40,30 @@ public class TicketController {
         accRep.save(ac);
 
         return "Saved";
+    }
+    @RequestMapping("/tickets/addmany")
+    String addTickets(@RequestParam String idaccount, @RequestParam Integer idsession, @RequestParam String price,@RequestParam String  place,@RequestParam String row)
+    {
+        String [] prices = price.split(",");
+        String [] places = place.split(",");
+        String [] rows = row.split(",");
+        String out="";
+        for(int i=0;i<prices.length;i++) {
+            ticket tk = new ticket();
+            tk.setIdsession(idsession);
+            tk.setIdaccount(idaccount);
+            tk.setPrice(Float.parseFloat(prices[i]));
+            tk.setPlace(Integer.parseInt(places[i]));
+            tk.setRownum(Integer.parseInt(rows[i]));
+            account ac = accRep.findByIdaccount(idaccount);
+            session sn = sessionRep.findByIdsession(idsession);
+            out+="place:"+places[i]+",row: "+rows[i]+"   ;";
+            ac.setTk(tk);
+            sn.setTk(tk);
+            sessionRep.save(sn);
+            accRep.save(ac);
+        }
+        return "Saved: "+out;
     }
 
     @RequestMapping("/tickets/delete")
