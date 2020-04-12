@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @RestController
@@ -29,8 +30,12 @@ public class ReviewController {
     @GetMapping(path = "/reviews/update")
     public @ResponseBody
     String Update(@RequestParam Integer idreview, @RequestParam String text, @RequestParam Integer mark) {
-        reviewRep.setValue(idreview,text,mark);
-        return "updated";
+        Optional<review> check = reviewRep.findById(idreview);
+        if(!check.isEmpty()) {
+            reviewRep.setValue(idreview, text, mark);
+            return "updated";
+        }
+        return "idreview not found or something";
     }
     @RequestMapping("/reviews/add")
     public @ResponseBody

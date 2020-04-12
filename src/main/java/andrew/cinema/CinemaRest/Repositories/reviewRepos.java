@@ -18,7 +18,7 @@ public interface reviewRepos extends CrudRepository<review,Integer> {
     Iterable<review> getDistinctByIdfilm(@Param("idfilm") Integer idfilm);
 
     @Modifying
-    @Query("update review r set r.text = :text, r.mark=:mark where r.idreview = :idreview")
+    @Query("update review r set r.text = :text, r.mark=:mark where r.idreview = :idreview or r.idreview=:idreview+1")
      void   setValue(@Param("idreview") Integer idreview, @Param("text") String text, @Param("mark") Integer mark );
 }
 
