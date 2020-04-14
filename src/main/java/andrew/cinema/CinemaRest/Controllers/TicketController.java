@@ -66,7 +66,7 @@ public class TicketController {
         }
         return "Saved: "+out;
     }
-    @RequestMapping("/tickets/current")
+    @RequestMapping("/tickets/this")
     public @ResponseBody
     Iterable<ticket>getAllTicketsForSession(@RequestParam Integer idsession) {
        return ticketRep.getAllTicketsForSession(idsession);
