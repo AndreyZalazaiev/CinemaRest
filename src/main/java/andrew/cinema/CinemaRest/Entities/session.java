@@ -30,6 +30,8 @@ public class session {
     private Date start;
     @NotNull
     private Date end;
+    @NotNull
+    private Double baseprice;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idsession",referencedColumnName ="idsession")
