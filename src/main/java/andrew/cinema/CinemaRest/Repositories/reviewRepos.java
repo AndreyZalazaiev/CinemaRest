@@ -14,6 +14,9 @@ import java.util.List;
 public interface reviewRepos extends CrudRepository<review,Integer> {
     @Query("from review r where r.idfilm=:idflm ")
     List<review> search(@Param("idflm") Integer id);
+
+    @Query("from review group by idaccount,idfilm")
+    Iterable<review> getEveryone();
     @Query
     Iterable<review> getDistinctByIdfilm(@Param("idfilm") Integer idfilm);
 

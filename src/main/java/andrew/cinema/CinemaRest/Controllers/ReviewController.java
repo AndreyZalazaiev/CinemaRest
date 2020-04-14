@@ -24,7 +24,7 @@ public class ReviewController {
     @GetMapping(path = "/reviews")
     public @ResponseBody
     Iterable<review> getAll() {
-        return reviewRep.findAll();
+        return reviewRep.getEveryone();
     }
 
     @GetMapping(path = "/reviews/update")
