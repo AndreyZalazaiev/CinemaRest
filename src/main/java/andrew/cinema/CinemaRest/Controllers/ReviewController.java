@@ -5,10 +5,7 @@ import andrew.cinema.CinemaRest.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -57,7 +54,7 @@ public class ReviewController {
     @RequestMapping("/reviews/find")
     public @ResponseBody
     Iterable<review> find(@RequestParam int idfilm) {
-        return reviewRep.getDistinctByIdfilm(idfilm);
+        return reviewRep.getByIdfilm(idfilm);
     }
     @RequestMapping("/reviews/delete")
     public @ResponseBody

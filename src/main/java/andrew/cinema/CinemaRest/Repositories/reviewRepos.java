@@ -17,8 +17,8 @@ public interface reviewRepos extends CrudRepository<review,Integer> {
 
     @Query("from review group by idaccount,idfilm")
     Iterable<review> getEveryone();
-    @Query
-    Iterable<review> getDistinctByIdfilm(@Param("idfilm") Integer idfilm);
+    @Query("from review where idfilm=:idfilm group by idaccount,idfilm")
+    Iterable<review> getByIdfilm(@Param("idfilm") Integer idfilm);
 
     @Modifying
     @Query("update review r set r.text = :text, r.mark=:mark where r.idreview = :idreview or r.idreview=:idreview+1")
