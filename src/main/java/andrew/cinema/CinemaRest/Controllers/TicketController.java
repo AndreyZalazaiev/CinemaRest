@@ -23,6 +23,7 @@ public class TicketController {
         return ticketRep.getAllDistinct();
     }
 
+
     @RequestMapping("/tickets/add")
     public @ResponseBody
     String addNew(@RequestParam String idaccount, @RequestParam Integer idsession, @RequestParam float price,@RequestParam Integer place,@RequestParam Integer row) {
@@ -65,7 +66,11 @@ public class TicketController {
         }
         return "Saved: "+out;
     }
-
+    @RequestMapping("/tickets/current")
+    public @ResponseBody
+    Iterable<ticket>getAllTicketsForSession(@RequestParam Integer idsession) {
+       return ticketRep.getAllTicketsForSession(idsession);
+    }
     @RequestMapping("/tickets/delete")
     public @ResponseBody
     String Remove(@RequestParam int id) {
