@@ -71,6 +71,11 @@ public class TicketController {
     Iterable<ticket>getAllTicketsForSession(@RequestParam Integer idsession) {
        return ticketRep.getAllTicketsForSession(idsession);
     }
+    @RequestMapping("/tickets/find")
+    public @ResponseBody
+    Iterable<ticket>currentUserTickets(@RequestParam String idaccount) {
+        return ticketRep.getTicketsForCurrentUser(idaccount);
+    }
     @RequestMapping("/tickets/delete")
     public @ResponseBody
     String Remove(@RequestParam int id) {
