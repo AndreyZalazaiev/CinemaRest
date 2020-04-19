@@ -28,7 +28,8 @@ public interface accountRepos extends CrudRepository<account,Integer> {
             "ticket.idaccount = ? and \n" +
             "session.idfilm = film.idfilm and\n" +
             "session.idhall = hall.idhall and\n" +
-            "hall.idcinema = cinema.idcinema\n" +
+            "hall.idcinema = cinema.idcinema and\n" +
+            "session.Start >=CURDATE() \n"+
             "group by ticket.Place, ticket.Rownum,ticket.idticket\n" +
             "order by ticket.idticket",
             nativeQuery = true)
