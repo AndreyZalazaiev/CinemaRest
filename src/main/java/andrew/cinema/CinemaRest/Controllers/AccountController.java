@@ -5,6 +5,8 @@ import andrew.cinema.CinemaRest.Repositories.accountRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class AccountController {
     @Autowired
@@ -48,6 +50,11 @@ public class AccountController {
     public @ResponseBody
     Iterable<account> shortAccounts() {
         return accRep.shortView();
+    }
+    @GetMapping(path = "/account/info")
+    public @ResponseBody
+    List<?> getAllTickets(@RequestParam String idaccount) {
+        return accRep.ticketsInfoAccount(idaccount);
     }
 
 }
