@@ -29,7 +29,7 @@ public class AccountController {
     public @ResponseBody
     String Update(@RequestParam String idaccount,@RequestParam String dob) {
         account check = accRep.findByIdaccount(idaccount);
-        if(!check.equals(null)) {
+        if(check!=null) {
             check.setDoB(dob);
             return "updated";
         }

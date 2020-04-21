@@ -28,7 +28,7 @@ public class ReviewController {
     public @ResponseBody
     String Update(@RequestParam Integer idreview, @RequestParam String text, @RequestParam Integer mark) {
         Optional<review> check = reviewRep.findById(idreview);
-        if(!check.equals(null)) {
+        if(check!=null) {
             reviewRep.setValue(idreview, text, mark);
             return "updated";
         }
