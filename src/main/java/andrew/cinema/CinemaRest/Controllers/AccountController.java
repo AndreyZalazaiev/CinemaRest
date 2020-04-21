@@ -1,12 +1,20 @@
 package andrew.cinema.CinemaRest.Controllers;
 
 import andrew.cinema.CinemaRest.Entities.account;
+import andrew.cinema.CinemaRest.Entities.review;
 import andrew.cinema.CinemaRest.Repositories.accountRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+
+@Transactional
 @RestController
 public class AccountController {
     @Autowired
@@ -16,6 +24,16 @@ public class AccountController {
     public @ResponseBody
     Iterable<account> getAllUsers() {
         return accRep.findAll();
+    }
+    @GetMapping(path = "/accounts/update")
+    public @ResponseBody
+    String Update(@RequestParam String idaccount,@RequestParam String dob) {
+        account check = accRep.findByIdaccount(idaccount);
+        if(!check.equals(null)) {
+            check.setDoB(dob);
+            return "updated";
+        }
+        return "idaccount or you are disabled";
     }
 
     @RequestMapping("/accounts/add")
