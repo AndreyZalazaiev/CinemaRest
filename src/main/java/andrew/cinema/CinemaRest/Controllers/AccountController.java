@@ -35,7 +35,7 @@ public class AccountController {
     String UpdateBonuses(@RequestParam String idaccount,@RequestParam Integer bonuses) {
         account check = accRep.findByIdaccount(idaccount);
         if(check!=null) {
-            check.setBonus(bonuses);
+            check.setBonus((check.getBonus()+bonuses));
             return "updated";
         }
         return " No idaccount or you are disabled";
