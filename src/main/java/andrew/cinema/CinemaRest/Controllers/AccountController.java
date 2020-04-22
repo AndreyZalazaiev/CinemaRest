@@ -1,17 +1,12 @@
 package andrew.cinema.CinemaRest.Controllers;
 
 import andrew.cinema.CinemaRest.Entities.account;
-import andrew.cinema.CinemaRest.Entities.review;
 import andrew.cinema.CinemaRest.Repositories.accountRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 
 @Transactional
@@ -33,7 +28,27 @@ public class AccountController {
             check.setDoB(dob);
             return "updated";
         }
-        return "idaccount or you are disabled";
+        return "No idaccount or you are disabled";
+    }
+    @GetMapping(path = "/accounts/bonuses")
+    public @ResponseBody
+    String UpdateBonuses(@RequestParam String idaccount,@RequestParam Integer bonuses) {
+        account check = accRep.findByIdaccount(idaccount);
+        if(check!=null) {
+            check.setBonus(bonuses);
+            return "updated";
+        }
+        return " No idaccount or you are disabled";
+    }
+    @GetMapping(path = "/accounts/isresived")
+    public @ResponseBody
+    String UpdateRecived(@RequestParam String idaccount,@RequestParam Integer isresived) {
+        account check = accRep.findByIdaccount(idaccount);
+        if(check!=null) {
+            check.setIsresived(isresived);
+            return "updated";
+        }
+        return " No idaccount or you are disabled";
     }
 
     @RequestMapping("/accounts/add")
@@ -57,6 +72,12 @@ public class AccountController {
         return accRep.findByIdaccount(id);
     }
 
+    @RequestMapping("/accounts/isgift")
+    public @ResponseBody
+    int CheckIsResived(@RequestParam String idaccount) {
+        account acc =accRep.findByIdaccount(idaccount);
+        return acc.getIsresived();
+    }
 
     @RequestMapping("/accounts/delete")
     public @ResponseBody

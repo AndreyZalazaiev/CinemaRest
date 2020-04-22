@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,6 +29,8 @@ public class account {
     @NotNull
     private Integer Bonus;
     private Date DoB;
+    @JsonIgnore
+    private int isresived;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idaccount",referencedColumnName ="idaccount")

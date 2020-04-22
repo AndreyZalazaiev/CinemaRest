@@ -36,5 +36,12 @@ public interface accountRepos extends CrudRepository<account,Integer> {
             "order by ticket.idticket",
             nativeQuery = true)
    List<?> ticketsInfoAccount(String idaccount);
+    @Modifying
+    @Query("update account a set a.Bonus=:Bonus  where a.idaccount = :idacc")
+    void   updateBonuses(@Param("Bonus")Integer Bonus,@Param("idacc") String idacc);
+    @Modifying
+    @Query("update account a set a.isresived=:isResived  where a.idaccount = :idacc")
+    void   updateRecived(@Param("isResived")Integer isResived,@Param("idacc") String idacc);
+
 
 }
