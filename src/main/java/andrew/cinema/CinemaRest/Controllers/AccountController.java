@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -27,6 +28,21 @@ public class AccountController {
         if(check!=null) {
             check.setDoB(dob);
             return "updated";
+        }
+        return "No idaccount or you are disabled";
+    }
+    @GetMapping(path = "/accounts/hours")
+    public @ResponseBody
+    String Hours(@RequestParam String idaccount) {
+        account check = accRep.findByIdaccount(idaccount);
+        if(check!=null) {
+            List<Double> a = accRep.Hours(idaccount);
+            double hours =0;
+            for(int i=0;i<a.size();i++)
+            {
+                hours +=a.get(i);
+            }
+            return ""+hours;
         }
         return "No idaccount or you are disabled";
     }

@@ -42,6 +42,12 @@ public interface accountRepos extends CrudRepository<account,Integer> {
     @Modifying
     @Query("update account a set a.isresived=:isResived  where a.idaccount = :idacc")
     void   updateRecived(@Param("isResived")Integer isResived,@Param("idacc") String idacc);
+    @Query(value = "select hour(session.End)-hour(session.Start)+((minute(session.End)-minute(session.Start))/60)\n" +
+            "from cinema.session, cinema.ticket\n" +
+            "where session.idsession = ticket.idsession and \n" +
+            "ticket.idaccount =:idaccount\n" +
+            "group by session.idsession",nativeQuery = true)
+    List<Double> Hours(@Param("idaccount") String idaccount);
 
 
 }
