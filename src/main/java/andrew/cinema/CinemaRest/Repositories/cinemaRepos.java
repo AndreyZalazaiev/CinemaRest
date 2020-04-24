@@ -11,4 +11,5 @@ import java.util.List;
 public interface cinemaRepos extends CrudRepository<cinema,Integer> {
     @Query
     cinema findByIdcinema(Integer idcinema);
+
 }

@@ -9,4 +9,17 @@ public interface filmRepos extends CrudRepository<film,Integer> {
 
     @Query
     film findByIdfilm(Integer idfilm);
+    @Query(value = "SELECT DISTINCT\n" +
+            "    film.*\n" +
+            "FROM\n" +
+            "    cinema.film,\n" +
+            "    cinema.session\n" +
+            "WHERE\n" +
+            "    (film.idfilm = session.idfilm\n" +
+            "        AND session.Start >= CURDATE())\n" +
+            "        OR film.idfilm NOT IN (SELECT DISTINCT\n" +
+            "            session.idfilm\n" +
+            "        FROM\n" +
+            "            cinema.session);",nativeQuery = true)
+    Iterable<film> getALL();
 }

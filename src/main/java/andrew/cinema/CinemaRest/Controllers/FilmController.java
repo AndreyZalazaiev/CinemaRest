@@ -14,7 +14,7 @@ public class FilmController {
     @GetMapping(path = "/films")
     public @ResponseBody
     Iterable<film> getAllFilms() {
-        return filmRep.findAll();
+        return filmRep.getALL();
     }
 
     @RequestMapping("/films/add")
