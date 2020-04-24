@@ -74,6 +74,7 @@ public class TicketController {
             tk.setPlace(Integer.parseInt(places[i]));
             tk.setRownum(Integer.parseInt(rows[i]));
             account ac = accRep.findByIdaccount(idaccount);
+            ac.setBonus(ac.getBonus()+(int)(Integer.parseInt(prices[i])/3));
             to=ac.getEmail();
             session sn = sessionRep.findByIdsession(idsession);
             out+="place:"+places[i]+",row: "+rows[i]+"   ;";
