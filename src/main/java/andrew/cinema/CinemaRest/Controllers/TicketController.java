@@ -78,6 +78,7 @@ public class TicketController {
                 session s =sessionRep.findByIdsession(idsession);
                 film f =filmRepos.findByIdfilm(s.getIdfilm());
                 mailText.append("Film: "+f.getName()+"\n");
+                mailText.append(f.getImage());
                 mailText.append("Genre:"+f.getGenre()+"\n");
                 mailText.append("Session time from "+ s.getStart() +" to "+s.getEnd()+"\n");
             }
