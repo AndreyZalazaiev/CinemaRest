@@ -66,6 +66,7 @@ public class TicketController {
         StringBuilder mailText = new StringBuilder();
         mailText.append("Purchase information from best cinema in the world^\n");
         String to="";
+        account cur=null;
         for(int i=0;i<prices.length;i++) {
             ticket tk = new ticket();
             tk.setIdsession(idsession);
@@ -79,6 +80,7 @@ public class TicketController {
             session sn = sessionRep.findByIdsession(idsession);
             out+="place:"+places[i]+",row: "+rows[i]+"   ;";
             if(i==0){
+                cur=ac;
                 session s =sessionRep.findByIdsession(idsession);
                 film f =filmRepos.findByIdfilm(s.getIdfilm());
                 mailText.append("Film: "+f.getName()+"\n");
@@ -86,12 +88,13 @@ public class TicketController {
                 mailText.append("Session time from "+ s.getStart() +" to "+s.getEnd()+"\n");
             }
             mailText.append("#"+(i+1)+"\t");
-            mailText.append("Place: "+places[i] +"  and  Row: "+rows[i]+"   Price:"+prices[i]+"\n");
+            mailText.append("Place: "+places[i] +"  and  Row: "+rows[i]+"   Price:"+prices[i]+"   Bonuses: "+(int)(Integer.parseInt(prices[i])/3)+"\n");
             ac.setTk(tk);
             sn.setTk(tk);
             sessionRep.save(sn);
             accRep.save(ac);
         }
+        mailText.append("Final account bonuses value: "+cur.getBonus());
         mailText.append("Have a nice day!\nDo not forget to flex every day");
         sendEmail(to,"Сinema Flex",mailText.toString());
         return "Saved: "+out;
