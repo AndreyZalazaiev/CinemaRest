@@ -1,9 +1,11 @@
 package andrew.cinema.CinemaRest.Controllers;
 
 import andrew.cinema.CinemaRest.Entities.account;
+import andrew.cinema.CinemaRest.Entities.film;
 import andrew.cinema.CinemaRest.Entities.session;
 import andrew.cinema.CinemaRest.Entities.ticket;
 import andrew.cinema.CinemaRest.Repositories.accountRepos;
+import andrew.cinema.CinemaRest.Repositories.filmRepos;
 import andrew.cinema.CinemaRest.Repositories.sessionRepos;
 import andrew.cinema.CinemaRest.Repositories.ticketRepos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.HTML;
 
 
 @RestController
@@ -24,6 +25,8 @@ public class TicketController {
     private ticketRepos ticketRep;
     @Autowired
     private sessionRepos sessionRep;
+    @Autowired
+    private andrew.cinema.CinemaRest.Repositories.filmRepos filmRepos;
 
     @GetMapping(path = "/tickets")
     public @ResponseBody
@@ -58,7 +61,7 @@ public class TicketController {
         String [] rows = row.split(",");
         String out="";
         StringBuilder mailText = new StringBuilder();
-        mailText.append("Purchase information from best cinema in the world\n");
+        mailText.append("Purchase information from best cinema in the world^\n");
         String to="";
         for(int i=0;i<prices.length;i++) {
             ticket tk = new ticket();
@@ -71,14 +74,21 @@ public class TicketController {
             to=ac.getEmail();
             session sn = sessionRep.findByIdsession(idsession);
             out+="place:"+places[i]+",row: "+rows[i]+"   ;";
+            if(i==0){
+                session s =sessionRep.findByIdsession(idsession);
+                film f =filmRepos.findByIdfilm(s.getIdfilm());
+                mailText.append("Film: "+f.getName()+"\n");
+                mailText.append("Genre:"+f.getGenre()+"\n");
+                mailText.append("Session time from "+ s.getStart() +" to "+s.getEnd()+"\n");
+            }
             mailText.append("#"+(i+1)+"\t");
-            mailText.append("Place: "+places[i] +"  and Row: "+rows[i]+"\n");
+            mailText.append("Place: "+places[i] +"  and  Row: "+rows[i]+"   Price:"+prices[i]+"\n");
             ac.setTk(tk);
             sn.setTk(tk);
             sessionRep.save(sn);
             accRep.save(ac);
         }
-        mailText.append("Have a nice day!\nDo not forget to flex");
+        mailText.append("Have a nice day!\nDo not forget to flex every day");
         sendEmail(to,"Сinema Flex",mailText.toString());
         return "Saved: "+out;
     }
