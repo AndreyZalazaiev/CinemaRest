@@ -94,7 +94,7 @@ public class TicketController {
             sessionRep.save(sn);
             accRep.save(ac);
         }
-        mailText.append("Final account bonuses value: "+cur.getBonus());
+        mailText.append("Final account bonuses value: "+cur.getBonus()+"\n");
         mailText.append("Have a nice day!\nDo not forget to flex every day");
         sendEmail(to,"Сinema Flex",mailText.toString());
         return "Saved: "+out;
