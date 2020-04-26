@@ -4,6 +4,10 @@ import andrew.cinema.CinemaRest.Entities.film;
 import andrew.cinema.CinemaRest.Entities.session;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 public interface filmRepos extends CrudRepository<film,Integer> {
 
@@ -23,4 +27,9 @@ public interface filmRepos extends CrudRepository<film,Integer> {
             "            cinema.session) " +
             "order by idfilm;",nativeQuery = true)
     Iterable<film> getALL();
+    @Query(value="Select AVG(review.mark)\n" +
+            "from cinema.review,cinema.film\n" +
+            "Where film.idfilm = review.idfilm\n" +
+            "and film.idfilm =:id",nativeQuery = true)
+    Double Rating(@Param("id") Integer idfilm);
 }

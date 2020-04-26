@@ -3,9 +3,13 @@ package andrew.cinema.CinemaRest.Controllers;
 import andrew.cinema.CinemaRest.Entities.film;
 import andrew.cinema.CinemaRest.Repositories.filmRepos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@Transactional
 public class FilmController {
     //region Film thing
     @Autowired
@@ -30,6 +34,15 @@ public class FilmController {
         fm.setGenre(genre);
         filmRep.save(fm);
         return "Saved";
+    }
+    @RequestMapping("/films/rating")
+    public @ResponseBody
+    Double Rating(@RequestParam Integer idfilm) {
+        if(filmRep.findByIdfilm(idfilm)!=null) {
+
+            return filmRep.Rating(idfilm);
+        }
+        else return null;
     }
 
     @RequestMapping("/films/delete")
