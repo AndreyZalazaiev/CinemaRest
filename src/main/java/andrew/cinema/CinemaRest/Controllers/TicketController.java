@@ -89,7 +89,7 @@ public class TicketController {
                 mailText.append("Session time from "+ s.getStart() +" to "+s.getEnd()+"\n");
             }
             mailText.append("#"+(i+1)+"\t");
-            mailText.append("Place: "+places[i] +"  and  Row: "+rows[i]+"   Price:"+prices[i]+"   Bonuses: "+(int)bonus/prices.length+"\n");
+            mailText.append("Place: "+places[i] +"  and  Row: "+rows[i]+"   Price:"+prices[i]+"\n");
             ac.setTk(tk);
             sn.setTk(tk);
             sessionRep.save(sn);
