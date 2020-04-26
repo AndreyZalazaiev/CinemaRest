@@ -57,7 +57,7 @@ public class TicketController {
         return "Saved";
     }
     @RequestMapping("/tickets/addmany")
-    String addTickets(@RequestParam String idaccount, @RequestParam Integer idsession, @RequestParam String price,@RequestParam String  place,@RequestParam String row)
+    String addTickets(@RequestParam String idaccount, @RequestParam Integer idsession, @RequestParam String price,@RequestParam String  place,@RequestParam String row,@RequestParam Integer bonus)
     {
         String [] prices = price.split(",");
         String [] places = place.split(",");
@@ -75,7 +75,8 @@ public class TicketController {
             tk.setPlace(Integer.parseInt(places[i]));
             tk.setRownum(Integer.parseInt(rows[i]));
             account ac = accRep.findByIdaccount(idaccount);
-            ac.setBonus(ac.getBonus()+(int)(Integer.parseInt(prices[i])/3));
+            if(i==0)//один раз
+            ac.setBonus(ac.getBonus()+bonus);
             to=ac.getEmail();
             session sn = sessionRep.findByIdsession(idsession);
             out+="place:"+places[i]+",row: "+rows[i]+"   ;";
