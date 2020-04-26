@@ -15,5 +15,11 @@ public class Controller {
         modelAndView.setViewName("home");
         return modelAndView;
     }
+    @RequestMapping("/about")
+    public ModelAndView about () {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("about");
+        return modelAndView;
+    }
 
 }
