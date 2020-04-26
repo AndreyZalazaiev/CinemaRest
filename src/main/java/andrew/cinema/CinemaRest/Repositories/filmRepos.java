@@ -20,6 +20,7 @@ public interface filmRepos extends CrudRepository<film,Integer> {
             "        OR film.idfilm NOT IN (SELECT DISTINCT\n" +
             "            session.idfilm\n" +
             "        FROM\n" +
-            "            cinema.session);",nativeQuery = true)
+            "            cinema.session) " +
+            "order by idfilm;",nativeQuery = true)
     Iterable<film> getALL();
 }
