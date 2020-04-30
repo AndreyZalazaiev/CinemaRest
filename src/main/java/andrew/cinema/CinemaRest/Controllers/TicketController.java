@@ -57,7 +57,7 @@ public class TicketController {
         return "Saved";
     }
     @RequestMapping("/tickets/addmany")
-    String addTickets(@RequestParam String idaccount, @RequestParam Integer idsession, @RequestParam String price,@RequestParam String  place,@RequestParam String row,@RequestParam Integer bonus)
+    String addTickets(@RequestParam String idaccount, @RequestParam Integer idsession, @RequestParam String price,@RequestParam String  place,@RequestParam String row,@RequestParam Integer bonus,@RequestParam Integer sent)
     {
         String [] prices = price.split(",");
         String [] places = place.split(",");
@@ -97,6 +97,7 @@ public class TicketController {
         }
         mailText.append("Final account bonuses value: "+cur.getBonus()+"\n");
         mailText.append("Have a nice day!\nDo not forget to flex every day");
+        if(sent==1)
         sendEmail(to,"Сinema Flex",mailText.toString());
         return "Saved: "+out;
     }
