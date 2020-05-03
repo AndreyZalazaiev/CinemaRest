@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
+//@EnableWebSecurity
 public class CinemaRestApplication {
 
 	public static void main(String[] args) {

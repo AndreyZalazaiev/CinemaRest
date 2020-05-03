@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/table.css">
+    <title>Films demo </title>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-image">
+                <thead>
+                <tr >
+                    <th scope="col">Name</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Trailer</th>
+                    <th scope="col">Age limitations</th>
+                    <th scope="col">Genre</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="film : ${films}">
+                    <th scope="row" th:text="${film.Name}" ></th>
+                    <td class="w-25">
+                        <img th:src="${film.Image}" class="img-fluid img-thumbnail" >
+                    </td>
+                    <td th:text="${film.Description}"></td>
+                    <td><a th:href="${film.Trailer}"> Link</a></td>
+                    <td th:text="${film.ageLimit}"></td>
+                    <td th:text="${film.Genre}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

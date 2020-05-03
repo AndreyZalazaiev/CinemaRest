@@ -5,39 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" >Flex Api  <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="https://restapicinema.herokuapp.com/cinema">Cinema </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://restapicinema.herokuapp.com/accounts">Accounts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://restapicinema.herokuapp.com/films">Films</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="https://restapicinema.herokuapp.com/halls">Halls</a>
-        </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://restapicinema.herokuapp.com/sessions">Sessions</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="https://restapicinema.herokuapp.com/tickets">Tickets</a>
-        </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://restapicinema.herokuapp.com/reviews">Reviews</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://restapicinema.herokuapp.com/about">About</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<div th:insert="~{header :: head}"></div>
 <main role="main">
 <div class="jumbotron">
     <div class="container">

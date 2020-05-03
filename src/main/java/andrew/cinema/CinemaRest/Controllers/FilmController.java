@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Transactional
@@ -51,5 +52,6 @@ public class FilmController {
         filmRep.deleteById(id);
         return "deleted id:" + id;
     }
+
 
 }
