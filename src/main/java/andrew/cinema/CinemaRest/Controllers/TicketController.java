@@ -16,12 +16,13 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 
 @RestController
 public class TicketController {
     @Autowired
-    private JavaMailSender javaMailSender;
+    private  JavaMailSender javaMailSender;
     @Autowired
     private accountRepos accRep;
     @Autowired
@@ -64,7 +65,7 @@ public class TicketController {
         String [] rows = row.split(",");
         String out="";
         StringBuilder mailText = new StringBuilder();
-        mailText.append("Purchase information from best cinema in the world^\n");
+        mailText.append("<font size=\"14\">Purchase information from best cinema in the world^</font><br/>");
         String to="";
         account cur=null;
         for(int i=0;i<prices.length;i++) {
@@ -84,21 +85,22 @@ public class TicketController {
                 cur=ac;
                 session s =sessionRep.findByIdsession(idsession);
                 film f =filmRepos.findByIdfilm(s.getIdfilm());
-                mailText.append("Film: "+f.getName()+"\n");
-                mailText.append("Genre:"+f.getGenre()+"\n");
-                mailText.append("Session time from "+ s.getStart() +" to "+s.getEnd()+"\n");
+                mailText.append("<p><b><font size=\"20\">"+"Film: "+f.getName() +"</font></b></p><br/>");
+                mailText.append("<img src=\""+f.getImage()+"\"><br/>");
+                mailText.append("<font size=\"14\">Genre:"+f.getGenre()+"<br/>");
+                mailText.append("Session time from "+ s.getStart() +" to "+s.getEnd()+"<br/>");
             }
             mailText.append("#"+(i+1)+"\t");
-            mailText.append("Place: "+places[i] +"  and  Row: "+rows[i]+"   Price:"+prices[i]+"\n");
+            mailText.append("Place: "+places[i] +"  and  Row: "+rows[i]+"   Price:"+prices[i]+"<br/>");
             ac.setTk(tk);
             sn.setTk(tk);
             sessionRep.save(sn);
             accRep.save(ac);
         }
-        mailText.append("Final account bonuses value: "+cur.getBonus()+"\n");
-        mailText.append("Have a nice day!\nDo not forget to flex every day");
+        mailText.append("Final account bonuses value: "+cur.getBonus()+"<br/>");
+        mailText.append("Have a nice day!<br/>Do not forget to flex every day</font>");
         if(sent==1)
-        sendEmail(to,"Сinema Flex",mailText.toString());
+        sendEmailHtml(to,"Сinema Flex",mailText.toString());
         return "Saved: "+out;
     }
     @RequestMapping("/tickets/this")
@@ -126,5 +128,18 @@ public class TicketController {
         msg.setText(text);
 
         javaMailSender.send(msg);
+    }//an old one , without a picture
+    public void sendEmailHtml(final String to,final String subject,final String msg) {
+        try{
+            MimeMessage message = javaMailSender.createMimeMessage();
+
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            message.setContent(msg, "text/html");
+            helper.setTo(to);
+            helper.setSubject(subject);
+
+            javaMailSender.send(message);
+        }catch(MessagingException e){e.printStackTrace();}
     }
+
 }
