@@ -65,7 +65,7 @@ public class TicketController {
         String [] rows = row.split(",");
         String out="";
         StringBuilder mailText = new StringBuilder();
-        mailText.append("<font size=\"14\">Purchase information from best cinema in the world^</font><br/>");
+        mailText.append("<font size=\"6\">Purchase information from best cinema in the world^<br/>");
         String to="";
         account cur=null;
         for(int i=0;i<prices.length;i++) {
@@ -85,9 +85,9 @@ public class TicketController {
                 cur=ac;
                 session s =sessionRep.findByIdsession(idsession);
                 film f =filmRepos.findByIdfilm(s.getIdfilm());
-                mailText.append("<p><b><font size=\"20\">"+"Film: "+f.getName() +"</font></b></p><br/>");
+                mailText.append("Film: <b>"+f.getName() +"</b></p><br/>");
                 mailText.append("<img src=\""+f.getImage()+"\"><br/>");
-                mailText.append("<font size=\"14\">Genre:"+f.getGenre()+"<br/>");
+                mailText.append("Genre:"+f.getGenre()+"<br/>");
                 mailText.append("Session time from "+ s.getStart() +" to "+s.getEnd()+"<br/>");
             }
             mailText.append("#"+(i+1)+"\t");
@@ -98,7 +98,7 @@ public class TicketController {
             accRep.save(ac);
         }
         mailText.append("Final account bonuses value: "+cur.getBonus()+"<br/>");
-        mailText.append("Have a nice day!<br/>Do not forget to flex every day</font>");
+        mailText.append("Have a nice day!<br/>Do not forget to flex every day</font></p>");
         if(sent==1)
         sendEmailHtml(to,"Сinema Flex",mailText.toString());
         return "Saved: "+out;
