@@ -70,7 +70,7 @@ public class TicketController {
         account cur = null;
         if (reserve == 0) {//tickets buying
             for (int i = 0; i < prices.length; i++) {
-                ticketRep.perfromBuying(idsession, Integer.parseInt(places[i]), Integer.parseInt(rows[i]));
+                ticketRep.perfromBuying(idsession, Integer.parseInt(places[i]), Integer.parseInt(rows[i]),Float.parseFloat(prices[i]));
                 account ac = accRep.findByIdaccount(idaccount);
                 to = ac.getEmail();
                 if (i == 0) {
