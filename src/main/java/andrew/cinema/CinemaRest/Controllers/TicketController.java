@@ -7,6 +7,7 @@ import andrew.cinema.CinemaRest.Entities.ticket;
 import andrew.cinema.CinemaRest.Repositories.accountRepos;
 import andrew.cinema.CinemaRest.Repositories.sessionRepos;
 import andrew.cinema.CinemaRest.Repositories.ticketRepos;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -67,7 +68,7 @@ public class TicketController {
         mailText.append("<div><font size=\"6\">Purchase information from best cinema in the world^<br/>");
         String to = "";
         account cur = null;
-        if (reserve == 0) {
+        if (reserve == 0) {//tickets buying
             for (int i = 0; i < prices.length; i++) {
                 ticketRep.perfromBuying(idsession, Integer.parseInt(places[i]), Integer.parseInt(rows[i]));
                 account ac = accRep.findByIdaccount(idaccount);
@@ -91,7 +92,7 @@ public class TicketController {
             if (sent == 1)
                 SendEmailHtml(to, "Сinema Flex", mailText.toString());
             return "Saved: " + out;
-        } else {
+        } else {//reserve
             for (int i = 0; i < prices.length; i++) {
                 ticket tk = new ticket();
                 tk.setIdsession(idsession);
@@ -100,6 +101,7 @@ public class TicketController {
                 tk.setPlace(Integer.parseInt(places[i]));
                 tk.setReservation(LocalDateTime.now());
                 tk.setRownum(Integer.parseInt(rows[i]));
+
                 account ac = accRep.findByIdaccount(idaccount);
                 session sn = sessionRep.findByIdsession(idsession);
                 out += "place:" + places[i] + ",row: " + rows[i] + "   ;";
@@ -117,6 +119,16 @@ public class TicketController {
     @RequestMapping("/tickets/this")
     public @ResponseBody
     Iterable<ticket> getAllTicketsForSession(@RequestParam Integer idsession) {
+        val tickets =ticketRep.getAllTicketsForSession(idsession);
+        for (ticket tk :tickets
+             ) {
+            if(tk.getReservation()!=null)
+            if(tk.getReservation().plusMinutes(15).compareTo(LocalDateTime.now())<=0)
+            {
+                ticketRep.deleteCouple(tk.getIdticket());
+
+            }
+        }
         return ticketRep.getAllTicketsForSession(idsession);
     }
 

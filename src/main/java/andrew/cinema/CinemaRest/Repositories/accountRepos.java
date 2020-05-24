@@ -25,14 +25,15 @@ public interface accountRepos extends JpaRepository<account,Integer> {
 
     @Query(" select Name,Picture,idaccount from account  ")
     Iterable<account> shortView();
-    @Query(value="SELECT ticket.*, session.Start, session.End, film.Image, film.Name FName, hall.Name HName, hall.Type, cinema.Name CName, cinema.Adress\n" +
+    @Query(value="SELECT ticket.idticket,ticket.Price,ticket.Place,ticket.Rownum,ticket.idsession,ticket.idaccount, session.Start, session.End, film.Image, film.Name FName, hall.Name HName, hall.Type, cinema.Name CName, cinema.Adress\n" +
             "FROM cinema.ticket, cinema.session, cinema.film, cinema.hall,cinema.cinema\n" +
             "where ticket.idsession = session.idsession and \n" +
             "ticket.idaccount = ? and \n" +
             "session.idfilm = film.idfilm and\n" +
             "session.idhall = hall.idhall and\n" +
             "hall.idcinema = cinema.idcinema and\n" +
-            "session.Start >=CURDATE() \n"+
+            "session.Start >=CURDATE() and\n" +
+            "ticket.reservation IS NULL "+
             "group by ticket.Place, ticket.Rownum\n" +
             "order by ticket.idticket",
             nativeQuery = true)
