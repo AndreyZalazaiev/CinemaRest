@@ -46,7 +46,7 @@ public interface accountRepos extends JpaRepository<account,Integer> {
     @Query(value = "select hour(session.End)-hour(session.Start)+((minute(session.End)-minute(session.Start))/60)\n" +
             "from cinema.session, cinema.ticket\n" +
             "where session.idsession = ticket.idsession and session.Start<=CURDATE() and \n" +
-            "ticket.idaccount =:idaccount\n" +
+            "ticket.idaccount =:idaccount\n " +
             "group by session.idsession",nativeQuery = true)
     List<Double> Hours(@Param("idaccount") String idaccount);
 

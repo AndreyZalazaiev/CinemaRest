@@ -1,5 +1,6 @@
 package andrew.cinema.CinemaRest.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -29,6 +33,8 @@ public class ticket{
     private Integer place;
     @NotNull
     private Integer rownum;
+    @JsonIgnore
+    private LocalDateTime reservation;
 
 
 }
