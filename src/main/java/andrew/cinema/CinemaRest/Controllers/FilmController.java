@@ -52,6 +52,14 @@ public class FilmController {
         filmRep.deleteById(id);
         return "deleted id:" + id;
     }
-
-
+    @GetMapping(path = "/films/actual")
+    public @ResponseBody
+    Iterable<film> getActual() {
+        return filmRep.getActual();
+    }
+    @GetMapping(path = "/films/soon")
+    public @ResponseBody
+    Iterable<film> getPremiere() {
+        return filmRep.getSoon();
+    }
 }
