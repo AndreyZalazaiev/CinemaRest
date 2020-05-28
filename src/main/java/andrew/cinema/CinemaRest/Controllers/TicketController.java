@@ -161,7 +161,7 @@ public class TicketController {
             MimeMessage message = javaMailSender.createMimeMessage();
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            message.setContent(msg, "text/html");
+            message.setContent(msg, "text/html; charset=UTF-8");
             helper.setTo(to);
             helper.setSubject(subject);
 
